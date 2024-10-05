@@ -1,0 +1,15 @@
+Package ()
+{
+    "DEVICE",
+    "\_SB.STAT",
+    Package ()
+    {
+        "COMPONENT",
+        0x0000000000000000,
+        Package ()
+        {
+            "FSTATE",
+            0x0000000000000000,
+        },
+    },
+},
