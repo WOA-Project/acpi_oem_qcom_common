@@ -23,7 +23,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
 
     Scope (\_SB)
     {
-        Name (PSUB, "SIP08350")
+        Name (PSUB, "QSP08350")
         Name (SOID, 0xFFFFFFFF)
         Name (STOR, 0xABCABCAB)
         Name (SIDS, "899800000000000")
@@ -2017,6 +2017,22 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 ElseIf ((\_SB.PSUB == "CDP08350"))
                 {
                     Return ("CDP08350")
+                }
+                ElseIf ((\_SB.PSUB == "ATP08350"))
+                {
+                    Return ("ATP08350")
+                }
+                ElseIf ((\_SB.PSUB == "HDK08350"))
+                {
+                    Return ("HDK08350")
+                }
+                ElseIf ((\_SB.PSUB == "HHG08350"))
+                {
+                    Return ("HHG08350")
+                }
+                ElseIf ((\_SB.PSUB == "SIP08350"))
+                {
+                    Return ("SIP08350")
                 }
             }
 

@@ -23,7 +23,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
 
     Scope (\_SB)
     {
-        Name (PSUB, "GRD08350")
+        Name (PSUB, "HHG08350")
         Name (SOID, 0xFFFFFFFF)
         Name (STOR, 0xABCABCAB)
         Name (SIDS, "899800000000000")
@@ -2018,6 +2018,22 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 {
                     Return ("CDP08350")
                 }
+                ElseIf ((\_SB.PSUB == "ATP08350"))
+                {
+                    Return ("ATP08350")
+                }
+                ElseIf ((\_SB.PSUB == "HDK08350"))
+                {
+                    Return ("HDK08350")
+                }
+                ElseIf ((\_SB.PSUB == "HHG08350"))
+                {
+                    Return ("HHG08350")
+                }
+                ElseIf ((\_SB.PSUB == "SIP08350"))
+                {
+                    Return ("SIP08350")
+                }
             }
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -2344,7 +2360,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 Return (DCVS) /* \_SB_.PEP0.DCVS */
             }
 
-            Name (PPPP, Package (0x42)
+            Name (PPPP, Package (0x41)
             {
                 Package (0x01)
                 {
@@ -2354,11 +2370,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 Package (0x01)
                 {
                     "PPP_RESOURCE_ID_SMPS6_B"
-                }, 
-
-                Package (0x01)
-                {
-                    "PPP_RESOURCE_ID_SMPS9_B"
                 }, 
 
                 Package (0x01)
@@ -7198,16 +7209,46 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                             Zero
                         }, 
 
-                        Package (0x02)
+                        Package (0x03)
                         {
                             "PSTATE", 
-                            Zero
+                            Zero, 
+                            Package (0x02)
+                            {
+                                "PMICGPIO", 
+                                Package (0x08)
+                                {
+                                    "IOCTL_PM_GPIO_CONFIG_DIGITAL_OUTPUT", 
+                                    Zero, 
+                                    0x07, 
+                                    Zero, 
+                                    Zero, 
+                                    Zero, 
+                                    One, 
+                                    0x04
+                                }
+                            }
                         }, 
 
-                        Package (0x02)
+                        Package (0x03)
                         {
                             "PSTATE", 
-                            One
+                            One, 
+                            Package (0x02)
+                            {
+                                "PMICGPIO", 
+                                Package (0x08)
+                                {
+                                    "IOCTL_PM_GPIO_CONFIG_DIGITAL_OUTPUT", 
+                                    Zero, 
+                                    0x07, 
+                                    Zero, 
+                                    Zero, 
+                                    One, 
+                                    0x03, 
+                                    0x05
+                                }
+                            }
                         }
                     }, 
 
@@ -20268,10 +20309,9 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
             Alias (\_SB.PSUB, _SUB)
             Name (_UID, One)  // _UID: Unique ID
             Name (_CCA, Zero)  // _CCA: Cache Coherency Attribute
-            Name (_DEP, Package (0x02)  // _DEP: Dependencies
+            Name (_DEP, Package (One)  // _DEP: Dependencies
             {
-                \_SB.PEP0, 
-                \_SB.UCS0
+                \_SB.PEP0
             })
             Name (_CRS, ResourceTemplate ()  // _CRS: Current Resource Settings
             {
@@ -20321,7 +20361,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                         Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                         {
                             One, 
-                            0x09, 
+                            0x06, 
                             Zero, 
                             Zero
                         })
@@ -20344,7 +20384,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                                 PLD_Shape              = "VERTICALRECTANGLE",
                                 PLD_GroupOrientation   = 0x0,
                                 PLD_GroupToken         = 0x0,
-                                PLD_GroupPosition      = 0x1,
+                                PLD_GroupPosition      = 0x3,
                                 PLD_Bay                = 0x0,
                                 PLD_Ejectable          = 0x0,
                                 PLD_EjectRequired      = 0x0,
@@ -20364,11 +20404,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 Method (_STA, 0, NotSerialized)  // _STA: Status
                 {
                     Return (STVL) /* \_SB_.URS1.USB1.STVL */
-                }
-
-                Method (CCVL, 0, NotSerialized)
-                {
-                    Return (\_SB.UCS0.ECC1)
                 }
 
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
@@ -20396,7 +20431,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                                         {
                                             Return (Buffer (One)
                                             {
-                                                 0x1D                                             // .
+                                                 0x0D                                             // .
                                             })
                                             Break
                                         }
@@ -20426,11 +20461,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                                 ElseIf ((_T_1 == 0x03))
                                 {
                                     Return (Zero)
-                                    Break
-                                }
-                                ElseIf ((_T_1 == 0x04))
-                                {
-                                    Return (0x02)
                                     Break
                                 }
                                 Else
@@ -20494,7 +20524,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                         Name (_UPC, Package (0x04)  // _UPC: USB Port Capabilities
                         {
                             One, 
-                            0x09, 
+                            0x06, 
                             Zero, 
                             Zero
                         })
@@ -20517,7 +20547,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                                 PLD_Shape              = "VERTICALRECTANGLE",
                                 PLD_GroupOrientation   = 0x0,
                                 PLD_GroupToken         = 0x0,
-                                PLD_GroupPosition      = 0x1,
+                                PLD_GroupPosition      = 0x3,
                                 PLD_Bay                = 0x0,
                                 PLD_Ejectable          = 0x0,
                                 PLD_EjectRequired      = 0x0,
@@ -20544,11 +20574,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                         0x000000A7,
                     }
                 })
-                Method (CCVL, 0, NotSerialized)
-                {
-                    Return (\_SB.UCS0.ECC1)
-                }
-
                 Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
                 {
                     While (One)
@@ -20653,7 +20678,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                                 }
                                 ElseIf ((_T_3 == One))
                                 {
-                                    Return (0x39)
+                                    Return (0x33)
                                     Break
                                 }
                                 Else

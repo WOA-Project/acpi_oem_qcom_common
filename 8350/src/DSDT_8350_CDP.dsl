@@ -2018,6 +2018,22 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 {
                     Return ("CDP08350")
                 }
+                ElseIf ((\_SB.PSUB == "ATP08350"))
+                {
+                    Return ("ATP08350")
+                }
+                ElseIf ((\_SB.PSUB == "HDK08350"))
+                {
+                    Return ("HDK08350")
+                }
+                ElseIf ((\_SB.PSUB == "HHG08350"))
+                {
+                    Return ("HHG08350")
+                }
+                ElseIf ((\_SB.PSUB == "SIP08350"))
+                {
+                    Return ("SIP08350")
+                }
             }
 
             Method (_DSM, 4, NotSerialized)  // _DSM: Device-Specific Method
