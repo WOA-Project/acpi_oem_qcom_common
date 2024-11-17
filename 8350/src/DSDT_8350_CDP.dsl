@@ -2030,9 +2030,9 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                 {
                     Return ("HHG08350")
                 }
-                ElseIf ((\_SB.PSUB == "SIP08350"))
+                ElseIf ((\_SB.PSUB == "QSP08350"))
                 {
-                    Return ("SIP08350")
+                    Return ("QSP08350")
                 }
             }
 
