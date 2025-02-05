@@ -112,15 +112,18 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                     {
                         0x000000EC,
                     }
-                    GpioInt (Edge, ActiveBoth, SharedAndWake, PullDown, 0x1388,
+                    GpioInt (Edge, ActiveBoth, SharedAndWake, PullNone, 0x1388,
                         "\\_SB.GIO0", 0x00, ResourceConsumer, ,
                         )
                         {   // Pin list
                             0x00C0
                         }
-                    GpioIo (Shared, PullDown, 0x0000, 0x0000, IoRestrictionNone,
+                    GpioIo (Shared, PullNone, 0x0000, 0x0000, IoRestrictionNone,
                         "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                        )
+                        RawDataBuffer (0x01)  // Vendor Data
+                        {
+                            0x01
+                        })
                         {   // Pin list
                             0x0060
                         }
@@ -3756,7 +3759,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                             {
                                 "FSTATE", 
                                 One, 
-                                Package (0x0F)
+                                Package (0x0E)
                                 {
                                     "ENTER", 
                                     Package (0x02)
@@ -3903,18 +3906,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
 
                                     Package (0x02)
                                     {
-                                        "PMICIBBLAB", 
-                                        Package (0x04)
-                                        {
-                                            "IOCTL_PM_IBBLAB_MODULE_ENABLE", 
-                                            0x02, 
-                                            Zero, 
-                                            Zero
-                                        }
-                                    }, 
-
-                                    Package (0x02)
-                                    {
                                         "TLMMGPIO", 
                                         Package (0x06)
                                         {
@@ -3928,7 +3919,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                                     }
                                 }, 
 
-                                Package (0x0D)
+                                Package (0x0C)
                                 {
                                     "EXIT", 
                                     Package (0x02)
@@ -4050,18 +4041,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                                             Zero, 
                                             "HLOS_DRV", 
                                             "REQUIRED"
-                                        }
-                                    }, 
-
-                                    Package (0x02)
-                                    {
-                                        "PMICIBBLAB", 
-                                        Package (0x04)
-                                        {
-                                            "IOCTL_PM_IBBLAB_MODULE_ENABLE", 
-                                            0x02, 
-                                            One, 
-                                            0x03
                                         }
                                     }, 
 
@@ -67221,12 +67200,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                         "\\_SB.GIO0", 0x00, ResourceConsumer, ,
                         )
                         {   // Pin list
-                            0x0007
-                        }
-                    GpioIo (Exclusive, PullUp, 0x0000, 0x0000, IoRestrictionNone,
-                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
                             0x0006
                         }
                 })
@@ -67288,12 +67261,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                         "\\_SB.GIO0", 0x00, ResourceConsumer, ,
                         )
                         {   // Pin list
-                            0x0007
-                        }
-                    GpioIo (Exclusive, PullUp, 0x0000, 0x0000, IoRestrictionNone,
-                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
                             0x0006
                         }
                 })
@@ -67309,7 +67276,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
 
             Method (RESI, 0, NotSerialized)
             {
-                Name (AINF, Package (0x11)
+                Name (AINF, Package (0x10)
                 {
                     0x03, 
                     Zero, 
@@ -67408,17 +67375,10 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                     {
                         "RESOURCE", 
                         "DSI_PANEL_RESET", 
-                        "DISPLAY"
-                    }, 
-
-                    Package (0x03)
-                    {
-                        "RESOURCE", 
-                        "DSI_PANEL_MODE_SELECT", 
                         "DISPLAY"
                     }
                 })
-                Name (BINF, Package (0x11)
+                Name (BINF, Package (0x10)
                 {
                     0x03, 
                     Zero, 
@@ -67517,13 +67477,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                     {
                         "RESOURCE", 
                         "DSI_PANEL_RESET", 
-                        "DISPLAY"
-                    }, 
-
-                    Package (0x03)
-                    {
-                        "RESOURCE", 
-                        "DSI_PANEL_MODE_SELECT", 
                         "DISPLAY"
                     }
                 })
@@ -79814,12 +79767,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
             {
                 Name (RBUF, ResourceTemplate ()
                 {
-                    GpioInt (Edge, ActiveLow, Exclusive, PullUp, 0x0000,
-                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                        )
-                        {   // Pin list
-                            0x0009
-                        }
                     Memory32Fixed (ReadWrite,
                         0xDEADBEEF,         // Address Base
                         0xBEEFDEAD,         // Address Length
@@ -79891,7 +79838,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                     {
                         0x000000F0,
                     }
-                    Interrupt (ResourceConsumer, Level, ActiveLow, Shared, ,, )
+                    Interrupt (ResourceConsumer, Level, ActiveHigh, Shared, ,, )
                     {
                         0x00000249,
                     }
@@ -82753,15 +82700,6 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
                         0x002F
                     }
             })
-            Name (NFCS, ResourceTemplate ()
-            {
-                GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionNone,
-                    "\\_SB.GIO0", 0x00, ResourceConsumer, ,
-                    )
-                    {   // Pin list
-                        0x002A
-                    }
-            })
             Name (NFCP, ResourceTemplate ()
             {
                 GpioIo (Exclusive, PullDefault, 0x0000, 0x0000, IoRestrictionNone,
@@ -84903,6 +84841,45 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8150 ", 0x00000003)
             Name (_HID, "QCOM059F")  // _HID: Hardware ID
             Alias (\_SB.PSUB, _SUB)
             Name (_CID, "QCOM056C")  // _CID: Compatible ID
+        }
+
+        Device (BRDG)
+        {
+            Name (_HID, "LNTI9611")  // _HID: Hardware ID
+            Name (_UID, Zero)  // _UID: Unique ID
+            Name (_DEP, Package (0x01)  // _DEP: Dependencies
+            {
+                \_SB.PEP0
+            })
+            Method (_CRS, 0, NotSerialized)  // _CRS: Current Resource Settings
+            {
+                Name (RBUF, ResourceTemplate ()
+                {
+                    I2cSerialBusV2 (0x003B, ControllerInitiated, 0x00061A80,
+                        AddressingMode7Bit, "\\_SB.IC10",
+                        0x00, ResourceConsumer, , Exclusive,
+                        )
+                    GpioInt (Level, ActiveHigh, Exclusive, PullDefault, 0x0000,
+                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
+                        )
+                        {   // Pin list
+                            0x003F
+                        }
+                    GpioIo (Exclusive, PullUp, 0x0000, 0x0000, IoRestrictionInputOnly,
+                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
+                        )
+                        {   // Pin list
+                            0x0009
+                        }
+                    GpioIo (Exclusive, PullUp, 0x0000, 0x0000, IoRestrictionOutputOnly,
+                        "\\_SB.GIO0", 0x00, ResourceConsumer, ,
+                        )
+                        {   // Pin list
+                            0x0007
+                        }
+                })
+                Return (RBUF) /* \_SB_.BRDG._CRS.RBUF */
+            }
         }
 
         Method (PPID, 0, Serialized)
