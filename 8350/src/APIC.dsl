@@ -1,5 +1,5 @@
 [000h 0000 004h]                   Signature : "APIC"    [Multiple APIC Description Table (MADT)]
-[004h 0004 004h]                Table Length : 000002E9
+[004h 0004 004h]                Table Length : 000002ED
 [008h 0008 001h]                    Revision : 05
 [009h 0009 001h]                    Checksum : 00
 [00Ah 0010 006h]                      Oem ID : "QCOM  "
@@ -211,9 +211,12 @@
 [2C9h 0713 008h]                Base Address : 0000000017A60000
 [2D1h 0721 004h]                      Length : 00100000
 
-[2D5h 0725 001h]               Subtable Type : 0F [Generic Interrupt Translator]
-[2D6h 0726 001h]                      Length : 14
+[2D5h 0725 001h]               Subtable Type : 0D [Generic MSI Frame]
+[2D6h 0726 001h]                      Length : 18
 [2D7h 0727 002h]                    Reserved : 0000
-[2D9h 0729 004h]              Translation ID : 00000000
-[2DDh 0733 008h]                Base Address : 0000000017A40000
-[2E5h 0741 004h]                    Reserved : 00000000
+[2D9h 0729 004h]                MSI Frame ID : 00000000
+[2DDh 0733 008h]                Base Address : 0000000017A10000
+[2E5h 0741 004h]       Flags (decoded below) : 00000001
+                                  Select SPI : 1
+[2E9h 0745 002h]                   SPI Count : 0080
+[2EBh 0747 002h]                    SPI Base : 0340
