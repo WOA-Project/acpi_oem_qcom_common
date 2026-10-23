@@ -33,32 +33,6 @@ Package ()
                 "SUPPRESSIBLE",
             },
         },
-        Package ()
-        {
-            "BUSARB",
-            Package ()
-            {
-                0x0000000000000003,
-                "ICBID_MASTER_PCIE_2A",
-                "ICBID_SLAVE_EBI1",
-                0x0000000000000001,
-                0x0000000000000001,
-                "SUPPRESSIBLE",
-            },
-        },
-        Package ()
-        {
-            "BUSARB",
-            Package ()
-            {
-                0x0000000000000003,
-                "ICBID_MASTER_PCIE_2A",
-                "ICBID_SLAVE_ANOC_PCIE_GEM_NOC",
-                0x0000000000401640,
-                0x0000000000401640,
-                "SUPPRESSIBLE",
-            },
-        },
     },
 },
 Package ()
