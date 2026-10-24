@@ -13175,7 +13175,7 @@ DefinitionBlock ("", "DSDT", 2, "QCOMM ", "SDM8350 ", 0x00000003)
                     }
                     Interrupt (ResourceConsumer, Level, ActiveHigh, Exclusive, ,, )
                     {
-                        0x00000384,
+                        0x000002EA,
                     }
                 })
                 Return (RBUF) /* \_SB_.IPCC._CRS.RBUF */
